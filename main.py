@@ -23,6 +23,18 @@ def dataFetcher():
 				imgVectorList.append(imgVector)
 	return imgVectorList
 
+
+def findAvgImgVector(imgVectorList):
+	"""
+	Computes and returns the mean of all the image vectors. 
+	"""
+	sumVector = imgVectorList[0].astype(np.uint32)
+	for index in range(1,len(imgVectorList)):
+		sumVector = sumVector.astype(np.uint32) + imgVectorList[index].astype(np.uint32)
+	return sumVector/float(len(imgVectorList))
+
 if __name__ == "__main__":
-	imgVectorMatrix = dataFetcher()
-	print imgVectorMatrix
+	imgVectorList = dataFetcher()
+	print len(imgVectorList)
+	avgImgVector = findAvgImgVector(imgVectorList)
+	print avgImgVector.shape
