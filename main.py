@@ -33,8 +33,21 @@ def findAvgImgVector(imgVectorList):
 		sumVector = sumVector.astype(np.uint32) + imgVectorList[index].astype(np.uint32)
 	return sumVector/float(len(imgVectorList))
 
+def makeOffsetVectorList(imgVectorList, avgImgVector):
+	"""
+	Subtracts avgImgVector from each image vector in imgVectorList
+	and returns a list of the computed offset vectors. 
+	"""
+	OffsetVectorList = []
+	for vector in imgVectorList:
+		OffsetVectorList.append(vector - avgImgVector)
+	return OffsetVectorList
+
+
 if __name__ == "__main__":
 	imgVectorList = dataFetcher()
 	print len(imgVectorList)
 	avgImgVector = findAvgImgVector(imgVectorList)
 	print avgImgVector.shape
+	OffsetVectorList = makeOffsetVectorList(imgVectorList, avgImgVector)
+	print len(OffsetVectorList), OffsetVectorList[0].shape
