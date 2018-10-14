@@ -43,6 +43,21 @@ def makeOffsetVectorList(imgVectorList, avgImgVector):
 		OffsetVectorList.append(vector - avgImgVector)
 	return OffsetVectorList
 
+def makeCovarianceMatrix(OffsetVectorList):
+	"""
+	Returns the covariance matrix
+	"""
+	return np.dot(np.array(OffsetVectorList).transpose(),np.array(OffsetVectorList))
+
+def computeEigenVectors(OffsetVectorList):
+	altMatrix = np.dot(np.array(OffsetVectorList),np.array(OffsetVectorList).transpose())
+	eigenValueArray, eigenVectorMatrix = np.linalg.eig(altMatrix)
+	eigenVectorList = []
+	for i in range(len(eigenVectorMatrix)):
+		eigenVectorList.append(np.dot(np.array(OffsetVectorList).transpose(),eigenVectorMatrix[i]))
+	return eigenValueArray, eigenVectorList
+
+
 
 if __name__ == "__main__":
 	imgVectorList = dataFetcher()
@@ -51,3 +66,7 @@ if __name__ == "__main__":
 	print avgImgVector.shape
 	OffsetVectorList = makeOffsetVectorList(imgVectorList, avgImgVector)
 	print len(OffsetVectorList), OffsetVectorList[0].shape
+	covarianceMatrix = makeCovarianceMatrix(OffsetVectorList)
+	print covarianceMatrix.shape
+	eigenValueArray, eigenVectorList = computeEigenVectors(OffsetVectorList)
+	
