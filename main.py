@@ -50,13 +50,25 @@ def makeCovarianceMatrix(OffsetVectorList):
 	return np.dot(np.array(OffsetVectorList).transpose(),np.array(OffsetVectorList))
 
 def computeEigenVectors(OffsetVectorList):
+	"""
+	Computes the eigrn values and eigen vectors of the covariance matrix
+	"""
 	altMatrix = np.dot(np.array(OffsetVectorList),np.array(OffsetVectorList).transpose())
 	eigenValueArray, eigenVectorMatrix = np.linalg.eig(altMatrix)
 	eigenVectorList = []
 	for i in range(len(eigenVectorMatrix)):
 		eigenVectorList.append(np.dot(np.array(OffsetVectorList).transpose(),eigenVectorMatrix[i]))
-	return eigenValueArray, eigenVectorList
+	return eigenValueArray.tolist(), eigenVectorList
 
+def selectKeigenVectors(eigenValueList, eigenVectorList, K = 300):
+	selectedEigenVectors = []
+	while len(selectedEigenVectors) < K:
+		maxEigenValue = max(eigenValueList)
+		index = eigenValueList.index(maxEigenValue)
+		selectedEigenVectors.append(eigenVectorList[index])
+		del eigenVectorList[index]
+		del eigenValueList[index]
+	return selectedEigenVectors
 
 
 if __name__ == "__main__":
@@ -68,5 +80,6 @@ if __name__ == "__main__":
 	print len(OffsetVectorList), OffsetVectorList[0].shape
 	covarianceMatrix = makeCovarianceMatrix(OffsetVectorList)
 	print covarianceMatrix.shape
-	eigenValueArray, eigenVectorList = computeEigenVectors(OffsetVectorList)
-	
+	eigenValueList, eigenVectorList = computeEigenVectors(OffsetVectorList)
+	selectedEigenVectors = selectKeigenVectors(eigenValueList, eigenVectorList)
+	print len(selectedEigenVectors)
