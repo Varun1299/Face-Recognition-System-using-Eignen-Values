@@ -61,6 +61,7 @@ def computeEigenVectors(OffsetVectorList):
 	return eigenValueArray.tolist(), eigenVectorList
 
 def selectKeigenVectors(eigenValueList, eigenVectorList, K = 300):
+	"Selects K eigen vectors corresponding to maximum K eigen values"
 	selectedEigenVectors = []
 	while len(selectedEigenVectors) < K:
 		maxEigenValue = max(eigenValueList)
@@ -69,7 +70,6 @@ def selectKeigenVectors(eigenValueList, eigenVectorList, K = 300):
 		del eigenVectorList[index]
 		del eigenValueList[index]
 	return selectedEigenVectors
-
 
 if __name__ == "__main__":
 	imgVectorList = dataFetcher()
