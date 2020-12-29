@@ -34,6 +34,7 @@ python main.py <path_to_image>
 
   For example, If the output is s4 then that means that the test image is recognized to be the person whose images are in folder s4.
 
+---
 
 The methodology is as described in the following papers:
 
