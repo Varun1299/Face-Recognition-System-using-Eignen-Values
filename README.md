@@ -35,10 +35,12 @@ python main.py <path_to_image>
   For example, If the output is s4 then that means that the test image is recognized to be the person whose images are in folder s4.
 
 
-The methodology is as described in the following paper:
+The methodology is as described in the following papers:
 
 [Turk, M., & Pentland, A. (1991). Eigenfaces for recognition. Journal of cognitive neuroscience, 3(1), 71-86](https://www.mitpressjournals.org/doi/pdf/10.1162/jocn.1991.3.1.71)
 
+
+[Eigenfaces for Face Detection/Recognition](https://www.cse.unr.edu/~bebis/MathMethods/PCA/case_study_pca1.pdf)
 
 **For details on dataset used and results, please refer to Report.pdf**
 
