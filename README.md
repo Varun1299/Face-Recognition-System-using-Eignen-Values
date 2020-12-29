@@ -35,6 +35,10 @@ python main.py <path_to_image>
   For example, If the output is s4 then that means that the test image is recognized to be the person whose images are in folder s4.
 
 
+**For details on dataset used and results, please refer to Report.pdf**
 
+---
+
+_This work was done as part of assignment in the Probability and Random Processes course at IIT Gandhinagar._
 
 
